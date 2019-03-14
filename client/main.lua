@@ -68,3 +68,8 @@ end)
 AddEventHandler('playerSpawned', function(spawn)
 	isDead = false
 end)
+
+RegisterNetEvent('esx:showBillNotification')
+AddEventHandler('esx:showBillNotification', function(msg,...)
+	ESX.ShowNotification(_U(msg,...))
+end)

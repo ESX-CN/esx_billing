@@ -25,7 +25,7 @@ AddEventHandler('esx_billing:sendBill', function(playerId, sharedAccountName, la
 					['@label']       = label,
 					['@amount']      = amount
 				}, function(rowsChanged)
-					TriggerClientEvent('esx:showNotification', xTarget.source, _U('received_invoice'))
+					TriggerClientEvent('esx:showBillNotification', xTarget.source, 'received_invoice')
 				end)
 			end
 
@@ -41,7 +41,7 @@ AddEventHandler('esx_billing:sendBill', function(playerId, sharedAccountName, la
 					['@label']       = label,
 					['@amount']      = amount
 				}, function(rowsChanged)
-					TriggerClientEvent('esx:showNotification', xTarget.source, _U('received_invoice'))
+					TriggerClientEvent('esx:showBillNotification', xTarget.source, 'received_invoice')
 				end)
 			end
 
@@ -123,8 +123,8 @@ ESX.RegisterServerCallback('esx_billing:payBill', function(source, cb, id)
 						xPlayer.removeMoney(amount)
 						xTarget.addMoney(amount)
 
-						TriggerClientEvent('esx:showNotification', xPlayer.source, _U('paid_invoice', ESX.Math.GroupDigits(amount)))
-						TriggerClientEvent('esx:showNotification', xTarget.source, _U('received_payment', ESX.Math.GroupDigits(amount)))
+						TriggerClientEvent('esx:showBillNotification', xPlayer.source, 'paid_invoice', ESX.Math.GroupDigits(amount))
+						TriggerClientEvent('esx:showBillNotification', xTarget.source, 'received_payment', ESX.Math.GroupDigits(amount))
 
 						cb()
 					end)
@@ -137,21 +137,21 @@ ESX.RegisterServerCallback('esx_billing:payBill', function(source, cb, id)
 						xPlayer.removeAccountMoney('bank', amount)
 						xTarget.addAccountMoney('bank', amount)
 
-						TriggerClientEvent('esx:showNotification', xPlayer.source, _U('paid_invoice', ESX.Math.GroupDigits(amount)))
-						TriggerClientEvent('esx:showNotification', xTarget.source, _U('received_payment', ESX.Math.GroupDigits(amount)))
+						TriggerClientEvent('esx:showBillNotification', xPlayer.source, 'paid_invoice', ESX.Math.GroupDigits(amount))
+						TriggerClientEvent('esx:showBillNotification', xTarget.source, 'received_payment', ESX.Math.GroupDigits(amount))
 
 						cb()
 					end)
 
 				else
-					TriggerClientEvent('esx:showNotification', xTarget.source, _U('target_no_money'))
-					TriggerClientEvent('esx:showNotification', xPlayer.source, _U('no_money'))
+					TriggerClientEvent('esx:showBillNotification', xTarget.source, 'target_no_money')
+					TriggerClientEvent('esx:showBillNotification', xPlayer.source, 'no_money')
 
 					cb()
 				end
 
 			else
-				TriggerClientEvent('esx:showNotification', xPlayer.source, _U('player_not_online'))
+				TriggerClientEvent('esx:showBillNotification', xPlayer.source, 'player_not_online')
 				cb()
 			end
 
@@ -167,9 +167,9 @@ ESX.RegisterServerCallback('esx_billing:payBill', function(source, cb, id)
 						xPlayer.removeMoney(amount)
 						account.addMoney(amount)
 
-						TriggerClientEvent('esx:showNotification', xPlayer.source, _U('paid_invoice', ESX.Math.GroupDigits(amount)))
+						TriggerClientEvent('esx:showBillNotification', xPlayer.source, 'paid_invoice', ESX.Math.GroupDigits(amount))
 						if xTarget ~= nil then
-							TriggerClientEvent('esx:showNotification', xTarget.source, _U('received_payment', ESX.Math.GroupDigits(amount)))
+							TriggerClientEvent('esx:showBillNotification', xTarget.source, 'received_payment', ESX.Math.GroupDigits(amount))
 						end
 
 						cb()
@@ -183,19 +183,19 @@ ESX.RegisterServerCallback('esx_billing:payBill', function(source, cb, id)
 						xPlayer.removeAccountMoney('bank', amount)
 						account.addMoney(amount)
 
-						TriggerClientEvent('esx:showNotification', xPlayer.source, _U('paid_invoice', ESX.Math.GroupDigits(amount)))
+						TriggerClientEvent('esx:showBillNotification', xPlayer.source, 'paid_invoice', ESX.Math.GroupDigits(amount))
 						if xTarget ~= nil then
-							TriggerClientEvent('esx:showNotification', xTarget.source, _U('received_payment', ESX.Math.GroupDigits(amount)))
+							TriggerClientEvent('esx:showBillNotification', xTarget.source, 'received_payment', ESX.Math.GroupDigits(amount))
 						end
 
 						cb()
 					end)
 
 				else
-					TriggerClientEvent('esx:showNotification', xPlayer.source, _U('no_money'))
+					TriggerClientEvent('esx:showBillNotification', xPlayer.source, 'no_money')
 
 					if xTarget ~= nil then
-						TriggerClientEvent('esx:showNotification', xTarget.source, _U('target_no_money'))
+						TriggerClientEvent('esx:showBillNotification', xTarget.source, 'target_no_money')
 					end
 
 					cb()
