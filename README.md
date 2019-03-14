@@ -5,11 +5,11 @@ FiveM基于ESX框架的账单系统
 ### 使用 Git
 ```
 cd resources
-git clone https://github.com/ESX-Org/esx_billing [esx]/esx_billing
+git clone https://github.com/ESX-CN/esx_billing [esx]/esx_billing
 ```
 
 ### 手动
-- 下载 https://github.com/ESX-Org/esx_billing/archive/master.zip
+- 下载 https://github.com/ESX-CN/esx_billing/archive/master.zip
 - 将它解压至 `[esx]` 目录
 
 
